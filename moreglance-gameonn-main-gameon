@@ -1,0 +1,35 @@
+server {
+    server_name game.gameonn.top;
+
+    root /var/www/gamesandmoregalnce/gameonn;
+
+    index index.html;
+
+    location / {
+        try_files $uri $uri.html $uri/ =404;
+    }
+   
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+    }
+  
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/game.gameonn.top/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/game.gameonn.top/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = game.gameonn.top) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name game.gameonn.top;
+    return 404; # managed by Certbot
+
+
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partial/head") %>
+</head>
+
+<body>
+    <%- include("./partial/navbar") %>
+        <%- include("./ads/1") %>
+            <div class="flex-grow p-3">
+                <section class="flex items-center justify-center lg:p-8 md:p-4">
+                    <div class="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 lg:gap-9 gap-4 w-full">
+                        <% let adCount=1; %>
+                            <% games.forEach((game, index)=> { %>
+                                <a href="<%= game.slug %>" v
+                                    class="relative rounded-3xl overflow-hidden shadow-2xl transition-transform transform hover:shadow-2xl group bg-white">
+                                    <img src="<%= game.logo %>" alt="<%= game.title %>"
+                                        class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300" />
+                                    <div
+                                        class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <img src="/playIcon.png" alt="play" class="w-16" />
+                                    </div>
+                                    <h2 class="text-xl font-bold text-black my-2 text-center">
+                                        <%= game.title %>
+                                    </h2>
+                                </a>
+                                <% if ((index + 1) % 6===0 && adCount <=7) { adCount++; %>
+                                    <div class="lg:col-span-6 md:col-span-4 col-span-2">
+                                        <%- include(`./ads/${adCount}`) %>
+                                    </div>
+                                    <% } %>
+                                        <% }); %>
+                    </div>
+                </section>
+                <%- include("./ads/8") %>
+            </div>
+            <%- include("./partial/footer") %>
+</body>
+
+</html>
