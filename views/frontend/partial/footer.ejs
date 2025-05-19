@@ -27,24 +27,6 @@
 <script>
     window.googletag = window.googletag || { cmd: [] };
     googletag.cmd.push(function () {
-        googletag.defineSlot('/21902364955,23201994558/Cm_gameonn.top_Games_And_Info_top/Cm_gameonn.top_Games_And_Info_Rewarded', [MISSING_WIDTH, MISSING_HEIGHT], 'div-gpt-ad-1747305043386-0').addService(googletag.pubads());
-        googletag.pubads().enableSingleRequest();
-        googletag.enableServices();
-    });
-</script>
-
-<!-- /21902364955,23201994558/Cm_gameonn.top_Games_And_Info_top/Cm_gameonn.top_Games_And_Info_Rewarded -->
-<div id='div-gpt-ad-1747305043386-0'>
-    <script>
-        googletag.cmd.push(function () { googletag.display('div-gpt-ad-1747305043386-0'); });
-    </script>
-</div>
-
-
-<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
-<script>
-    window.googletag = window.googletag || { cmd: [] };
-    googletag.cmd.push(function () {
         googletag.defineSlot('/21902364955,23201994558/Cm_gameonn.top_Games_And_Info_top/Cm_gameonn.top_Games_And_Info_Interstitial', [MISSING_WIDTH, MISSING_HEIGHT], 'div-gpt-ad-1747305074594-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
@@ -66,4 +48,53 @@
     toggleButton.addEventListener('click', () => {
         navMenu.classList.toggle('hidden');
     });
+</script>
+
+<!-- Body Rewarded Ad -->
+<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
+<div id='div-gpt-ad-1747305043386-0'>
+    <script> googletag.cmd.push(function () { googletag.display('div-gpt-ad-1747305043386-0'); });</script>
+</div>
+
+<script>
+    window.googletag = window.googletag || { cmd: [] };
+    let rewardedSlot;
+    let rewardPayload;
+    googletag.cmd.push(() => {
+        rewardedSlot = googletag.defineOutOfPageSlot(
+            "/21902364955,23201994558/Cm_gameonn.top_Games_And_Info_top/Cm_gameonn.top_Games_And_Info_Rewarded",
+            googletag.enums.OutOfPageFormat.REWARDED,
+        );
+        if (rewardedSlot) {
+            rewardedSlot.addService(googletag.pubads());
+            googletag.pubads().addEventListener("rewardedSlotReady", (event) => {
+                updateStatus("Rewarded ad slot is ready.");
+                event.makeRewardedVisible();
+                updateStatus("Rewarded ad is now playing.");
+            });
+            googletag.pubads().addEventListener("rewardedSlotClosed", dismissRewardedAd);
+            googletag.pubads().addEventListener("rewardedSlotGranted", (event) => {
+                rewardPayload = event.payload;
+                updateStatus(`You have been rewarded ${rewardPayload.amount} ${rewardPayload.type}!`);
+            });
+            googletag.pubads().addEventListener("slotRenderEnded", (event) => {
+                if (event.slot === rewardedSlot && event.isEmpty) {
+                    updateStatus("No ad returned for rewarded ad slot.");
+                }
+            });
+            googletag.enableServices();
+            googletag.display(rewardedSlot);
+        } else {
+            updateStatus("Rewarded ads are not supported on this page.");
+        }
+    });
+    function dismissRewardedAd() {
+        updateStatus("Rewarded ad has been closed.");
+        if (rewardedSlot) {
+            googletag.destroySlots([rewardedSlot]);
+        }
+    }
+    function updateStatus(message) {
+        console.log(message, "==>");
+    }
 </script>
