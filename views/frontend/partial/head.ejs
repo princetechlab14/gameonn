@@ -49,3 +49,29 @@
         googletag.enableServices();
     });
 </script> -->
+
+<script>
+    window.googletag = window.googletag || { cmd: [] };
+    var anchorSlot;
+    googletag.cmd.push(function () {
+        anchorSlot = googletag.defineOutOfPageSlot('/21902364955,23201994558/Cm_gameonn.top_Games_And_Info_top/Cm_gameonn.top_Games_And_Info_Anchor_Bottom', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR);
+        if (anchorSlot) {
+            anchorSlot.addService(googletag.pubads());
+        }
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+    });
+</script>
+
+<script>
+    window.googletag = window.googletag || { cmd: [] };
+    var anchorSlot;
+    googletag.cmd.push(function () {
+        anchorSlot = googletag.defineOutOfPageSlot('/21902364955,23201994558/Cm_gameonn.top_Games_And_Info_top/Cm_gameonn.top_Games_And_Info_Anchor_Top', googletag.enums.OutOfPageFormat.TOP_ANCHOR);
+        if (anchorSlot) {
+            anchorSlot.addService(googletag.pubads());
+        }
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+    });
+</script>
